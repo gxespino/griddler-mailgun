@@ -1,3 +1,5 @@
+require 'awesome_print'
+
 module Griddler
   module Mailgun
     class Adapter
@@ -5,6 +7,13 @@ module Griddler
 
       def initialize(params)
         @params = params
+        safe_params = @params.permit!
+        p '#' * 90
+        p 'ADAPTER:'
+        p '#' * 90
+        ap safe_params.to_hash
+        p '#' * 90
+
       end
 
       def self.normalize_params(params)
