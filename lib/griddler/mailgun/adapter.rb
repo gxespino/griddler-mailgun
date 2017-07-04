@@ -5,37 +5,36 @@ module Griddler
     class Adapter
       attr_reader :params
 
-      def initialize(params)
-        @params = params
-        safe_params = @params.permit!
-        p '#' * 90
-        p 'ADAPTER:'
-        p '#' * 90
-        ap safe_params.to_hash
-        p '#' * 90
-
+      def self.normalize_params(params)
+        new(params).normalize_params
       end
 
-      def self.normalize_params(params)
-        adapter = new(params)
-        adapter.normalize_params
+      def initialize(params)
+        @params = params
+        # safe_params = @params.permit!
+        # p '#' * 90
+        # p 'ADAPTER:'
+        # p '#' * 90
+        # ap safe_params.to_hash
+        # p '#' * 90
       end
 
       def normalize_params
         {
-          to: to_recipients,
-          cc: cc_recipients,
-          bcc: Array.wrap(param_or_header(:Bcc)),
-          from: determine_sender,
-          subject: params[:subject],
-          text: params['body-plain'],
-          html: params['body-html'],
-          attachments: attachment_files,
-          headers: serialized_headers
+          to:              to_recipients,
+          cc:              cc_recipients,
+          bcc:             Array.wrap(param_or_header(:Bcc)),
+          from:            determine_sender,
+          subject:         params[:subject],
+          text:            params['body-plain'],
+          html:            params['body-html'],
+          attachments:     attachment_files,
+          headers:         serialized_headers,
+          vendor_specific: VendorSpecific.normalize(params)
         }
       end
 
-    private
+      private
 
       def determine_sender
         sender = param_or_header(:From)
@@ -67,7 +66,6 @@ module Griddler
       end
 
       def serialized_headers
-
         # Griddler expects unparsed headers to pass to ActionMailer, which will manually
         # unfold, split on line-endings, and parse into individual fields.
         #

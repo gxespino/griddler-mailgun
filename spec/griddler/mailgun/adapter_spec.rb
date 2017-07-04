@@ -98,6 +98,12 @@ describe Griddler::Mailgun::Adapter, '.normalize_params' do
     expect(normalized_params[:bcc]).to eq []
   end
 
+  it 'it make a call to VendorSpecificNormalizer' do
+    expect(VendorSpecific).to receive(:normalize).with(default_params)
+
+    Griddler::Mailgun::Adapter.normalize_params(default_params)
+  end
+
   def upload_1
     @upload_1 ||= ActionDispatch::Http::UploadedFile.new(
       filename: 'photo1.jpg',
