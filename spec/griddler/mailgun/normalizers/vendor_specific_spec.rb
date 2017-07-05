@@ -6,8 +6,8 @@ describe VendorSpecific, '.normalize_params' do
       meeting_info: {
         name: 'Mid July Design Demo',
         date: Date.parse('20170711T1500'),
-        start_time: Time.parse('20170711T1500'),
-        end_time: Time.parse('20170711T1730'),
+        start_time: '3:00 PM',
+        end_time: '5:30 PM',
       }
     }
     normalized_params = VendorSpecific.normalize(default_params)

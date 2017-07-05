@@ -23,8 +23,8 @@ class VendorSpecific
       meeting_info: {
         name: summary,
         date: Date.parse(dt_start),
-        start_time: Time.parse(dt_start),
-        end_time: Time.parse(dt_end),
+        start_time: Time.parse(dt_start).strftime("%l:%M %p").strip,
+        end_time: Time.parse(dt_end).strftime("%l:%M %p").strip,
       }
     }
   end
