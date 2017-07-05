@@ -10,12 +10,14 @@ class VendorSpecific
   end
 
   def normalize
-    str = params["body-calendar"]
-    vformat = VFormat.decode_raw(str).first
-    vevent = vformat.VEVENT
-    summary = vevent.SUMMARY.value
+    return {} if params["body-calendar"].nil?
+
+    str      = params["body-calendar"]
+    vformat  = VFormat.decode_raw(str).first
+    vevent   = vformat.VEVENT
+    summary  = vevent.SUMMARY.value
     dt_start = vevent.DTSTART.value
-    dt_end = vevent.DTEND.value
+    dt_end   = vevent.DTEND.value
 
     {
       meeting_info: {
