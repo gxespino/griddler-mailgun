@@ -19,6 +19,13 @@ class VendorSpecific
     dt_start = vevent.DTSTART.value
     dt_end   = vevent.DTEND.value
 
+    puts '#' * 25
+    puts "Meeting: #{summary}"
+    puts "  Date: #{dt_start}"
+    puts "  Start time: #{Time.parse(dt_start)}"
+    puts "  End time: #{Time.parse(dt_end)}"
+    puts '#' * 25
+
     {
       meeting_info: {
         name: summary,
