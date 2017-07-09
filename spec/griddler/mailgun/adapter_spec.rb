@@ -7,6 +7,10 @@ describe Griddler::Mailgun::Adapter do
 end
 
 describe Griddler::Mailgun::Adapter, '.normalize_params' do
+  before do
+    Time.zone = 'EST'
+  end
+
   it 'works with Griddler::Email' do
     normalized_params = Griddler::Mailgun::Adapter.normalize_params(default_params)
     griddler_email = Griddler::Email.new(normalized_params)

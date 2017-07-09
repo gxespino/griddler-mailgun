@@ -1,13 +1,17 @@
 require 'spec_helper'
 
 describe VendorSpecific, '.normalize_params' do
+  before do
+    Time.zone = 'EST'
+  end
+
   it 'does stuff' do
     expected = {
       meeting_info: {
         name: 'Mid July Design Demo',
         date: Date.parse('20170711T1500'),
-        start_time: Time.parse('20170711T1500'),
-        end_time: Time.parse('20170711T1730')
+        start_time: Time.zone.parse('20170711T1500'),
+        end_time: Time.zone.parse('20170711T1730')
       }
     }
     normalized_params = VendorSpecific.normalize(default_params)

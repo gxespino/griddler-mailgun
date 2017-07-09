@@ -22,16 +22,16 @@ class VendorSpecific
     puts '#' * 25
     puts "Meeting: #{summary}"
     puts "  Date: #{dt_start}"
-    puts "  Start time: #{Time.parse(dt_start)}"
-    puts "  End time: #{Time.parse(dt_end)}"
+    puts "  Start time: #{Time.zone.parse(dt_start)}"
+    puts "  End time: #{Time.zone.parse(dt_end)}"
     puts '#' * 25
 
     {
       meeting_info: {
         name: summary,
         date: Date.parse(dt_start),
-        start_time: Time.parse(dt_start),
-        end_time: Time.parse(dt_end)
+        start_time: Time.zone.parse(dt_start),
+        end_time: Time.zone.parse(dt_end)
       }
     }
   end
