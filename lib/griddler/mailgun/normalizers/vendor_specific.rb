@@ -15,6 +15,7 @@ class VendorSpecific
     str      = params["body-calendar"]
     vformat  = VFormat.decode_raw(str).first
     vevent   = vformat.VEVENT
+    uid      = vevent.UID.value
     summary  = vevent.SUMMARY.value
     status   = vevent.STATUS.value
     dt_start = vevent.DTSTART.value
@@ -22,6 +23,7 @@ class VendorSpecific
 
     puts '#' * 25
     puts "Meeting: #{summary}"
+    puts "  UID: #{uid}"
     puts "  Date: #{dt_start}"
     puts "  Start time: #{Time.zone.parse(dt_start)}"
     puts "  End time: #{Time.zone.parse(dt_end)}"
@@ -30,6 +32,7 @@ class VendorSpecific
 
     {
       meeting_info: {
+        uid:  uid,
         name: summary,
         date: Date.parse(dt_start),
         start_time: Time.zone.parse(dt_start),
