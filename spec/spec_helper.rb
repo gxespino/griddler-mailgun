@@ -4,6 +4,7 @@ require 'griddler/mailgun'
 require 'action_dispatch'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/hash'
+require 'pry'
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
