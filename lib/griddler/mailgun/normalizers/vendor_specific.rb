@@ -16,6 +16,7 @@ class VendorSpecific
     vformat  = VFormat.decode_raw(str).first
     vevent   = vformat.VEVENT
     summary  = vevent.SUMMARY.value
+    status   = vevent.STATUS.value
     dt_start = vevent.DTSTART.value
     dt_end   = vevent.DTEND.value
 
@@ -24,6 +25,7 @@ class VendorSpecific
     puts "  Date: #{dt_start}"
     puts "  Start time: #{Time.zone.parse(dt_start)}"
     puts "  End time: #{Time.zone.parse(dt_end)}"
+    puts "  Status: #{status}"
     puts '#' * 25
 
     {
@@ -31,7 +33,8 @@ class VendorSpecific
         name: summary,
         date: Date.parse(dt_start),
         start_time: Time.zone.parse(dt_start),
-        end_time: Time.zone.parse(dt_end)
+        end_time: Time.zone.parse(dt_end),
+        status: status
       }
     }
   end

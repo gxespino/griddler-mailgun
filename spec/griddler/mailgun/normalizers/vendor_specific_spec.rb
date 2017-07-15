@@ -11,7 +11,8 @@ describe VendorSpecific, '.normalize_params' do
         name: 'Mid July Design Demo',
         date: Date.parse('20170711T1500'),
         start_time: Time.zone.parse('20170711T1500'),
-        end_time: Time.zone.parse('20170711T1730')
+        end_time: Time.zone.parse('20170711T1730'),
+        status: 'REQUEST'
       }
     }
     normalized_params = VendorSpecific.normalize(default_params)
